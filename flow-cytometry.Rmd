@@ -1,0 +1,202 @@
+---
+title: "Flow Cytometry Analysis — mCitrine Expression in S. cerevisiae"
+author: "Alex Gresham"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  html_notebook: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Background
+
+This analysis examines mCitrine fluorescence data collected on June 9, 2026, using the
+Cytek Aurora flow cytometer at the Gresham Laboratory, NYU. Four strains were analyzed:
+two negative control strains that lack the mCitrine gene (DGY3283, DGY2807), one
+constitutively mCitrine-expressing strain (DGY3955), and one experimental strain of
+interest (DGY3954).
+
+mCitrine is a yellow fluorescent protein (excitation ~516 nm, emission ~529 nm) detected
+via the B2-A channel. Fluorescence intensity is used as a proxy for mCitrine copy number
+and expression level per cell.
+
+The full class dataset (`June9_Scer_students.CSV`) contains gated summary statistics
+exported from the Cytek Aurora software. This notebook filters to the samples run by
+Alex Gresham (rows 14–17, identified by the suffix "AG").
+
+---
+
+## Load Packages
+
+```{r libraries}
+library(tidyverse)
+library(RColorBrewer)
+```
+
+---
+
+## Load and Filter Data
+
+```{r load-data}
+# Read exported Cytek summary statistics
+flow_raw <- read_csv("June9_Scer_students.CSV", show_col_types = FALSE)
+
+# The first column contains sample names; rename it
+colnames(flow_raw)[1] <- "Sample"
+
+# Filter to Alex Gresham's samples (suffix "AG") — rows 14–17
+flow_ag <- flow_raw %>%
+  filter(str_ends(Sample, "AG"))
+
+# Extract strain name from sample identifier
+flow_ag <- flow_ag %>%
+  mutate(Strain = str_extract(Sample, "\\d+(?=AG)"),
+         Strain = paste0("DGY", Strain))
+
+# Select key columns
+flow_summary <- flow_ag %>%
+  select(
+    Strain,
+    Singlets      = `FSC_Singlets Count`,
+    mCit_count    = `mCitrine Count`,
+    mCit_pct      = `mCitrine % Parent`,
+    Median_B2A    = `FSC_Singlets Median B2-A`
+  ) %>%
+  mutate(
+    mCit_pct   = as.numeric(mCit_pct),
+    Median_B2A = as.numeric(Median_B2A),
+    Singlets   = as.numeric(Singlets),
+    mCit_count = as.numeric(mCit_count)
+  )
+
+knitr::kable(flow_summary, digits = 2,
+             col.names = c("Strain", "FSC Singlets", "mCitrine+ Cells",
+                           "mCitrine % of Singlets", "Median B2-A"))
+```
+
+---
+
+## Plot 1 — Percentage of mCitrine-Positive Cells by Strain
+
+```{r bar-chart-pct, fig.width=6, fig.height=4}
+# Define strain order and labels
+strain_order <- c("DGY3283", "DGY2807", "DGY3955", "DGY3954")
+strain_labels <- c("DGY3283\n(0-copy ctrl)", "DGY2807\n(0-copy ctrl)",
+                   "DGY3955\n(mCitrine+)", "DGY3954\n(experimental)")
+
+flow_summary %>%
+  mutate(Strain = factor(Strain, levels = strain_order)) %>%
+  ggplot(aes(x = Strain, y = mCit_pct,
+             fill = mCit_pct > 5)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = paste0(round(mCit_pct, 1), "%")),
+            vjust = -0.4, size = 3.5, fontface = "bold") +
+  scale_x_discrete(labels = strain_labels) +
+  scale_fill_manual(values = c("FALSE" = "#aec6cf", "TRUE" = "#2a7f7f"),
+                    guide = "none") +
+  scale_y_continuous(limits = c(0, 110), expand = c(0, 0)) +
+  labs(
+    title = "mCitrine Expression by Strain",
+    subtitle = "Percentage of FSC-gated singlets in the mCitrine+ gate",
+    x = NULL,
+    y = "% mCitrine-positive cells"
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+---
+
+## Plot 2 — Median B2-A Fluorescence Intensity
+
+The B2-A channel measures mCitrine fluorescence. Comparing median B2-A across
+strains gives a sense of per-cell fluorescence intensity, independent of gating.
+
+```{r bar-chart-b2a, fig.width=6, fig.height=4}
+flow_summary %>%
+  mutate(Strain = factor(Strain, levels = strain_order)) %>%
+  ggplot(aes(x = Strain, y = Median_B2A, fill = Median_B2A > 5000)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = formatC(Median_B2A, format = "f", digits = 0, big.mark = ",")),
+            vjust = -0.4, size = 3.2) +
+  scale_x_discrete(labels = strain_labels) +
+  scale_fill_manual(values = c("FALSE" = "#aec6cf", "TRUE" = "#2a7f7f"),
+                    guide = "none") +
+  scale_y_continuous(labels = scales::comma, expand = expansion(mult = c(0, 0.12))) +
+  labs(
+    title = "Median B2-A Fluorescence by Strain",
+    subtitle = "Median mCitrine channel intensity across all FSC-gated singlets",
+    x = NULL,
+    y = "Median B2-A (a.u.)"
+  ) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+---
+
+## Plot 3 — Context: Alex's Strains vs. Full Class Dataset
+
+Compare mCitrine% across all 17 samples to place Alex's results in context.
+
+```{r full-context, fig.width=10, fig.height=5}
+flow_raw_clean <- flow_raw %>%
+  rename(Sample = 1) %>%
+  mutate(
+    mCit_pct = as.numeric(`mCitrine % Parent`),
+    Analyst  = case_when(
+      str_ends(Sample, "AG")  ~ "Alex Gresham",
+      str_ends(Sample, "LCS") ~ "Other student",
+      str_ends(Sample, "TJ")  ~ "Other student",
+      TRUE                    ~ "Other student"
+    ),
+    Short = str_remove(Sample, "Students_June9-")
+  )
+
+ggplot(flow_raw_clean, aes(x = reorder(Short, mCit_pct),
+                            y = mCit_pct, fill = Analyst)) +
+  geom_col() +
+  scale_fill_manual(values = c("Alex Gresham" = "#2a7f7f",
+                               "Other student" = "#b0bec5")) +
+  coord_flip() +
+  labs(
+    title = "mCitrine Expression — Full Class Dataset (June 9, 2026)",
+    x = NULL, y = "% mCitrine-positive cells", fill = NULL
+  ) +
+  theme_classic(base_size = 11) +
+  theme(plot.title = element_text(face = "bold"),
+        legend.position = "bottom")
+```
+
+---
+
+## Summary and Biological Interpretation
+
+```{r summary-table}
+flow_summary %>%
+  mutate(
+    Interpretation = case_when(
+      mCit_pct < 1   ~ "Negative control — no mCitrine gene present",
+      mCit_pct > 95  ~ "Constitutive mCitrine expression — single copy integration",
+      TRUE           ~ "Heterogeneous expression — possible CNV or regulated promoter"
+    )
+  ) %>%
+  knitr::kable(digits = 2,
+               col.names = c("Strain", "Singlets", "mCitrine+ Cells",
+                             "mCitrine%", "Median B2-A", "Interpretation"))
+```
+
+**Key findings:**
+
+- **DGY3283 and DGY2807** serve as zero-copy negative controls. Both show <0.05% mCitrine-positive cells, confirming that the gate effectively excludes non-fluorescent cells.
+
+- **DGY3955** shows 99.69% mCitrine positivity, consistent with constitutive single-copy expression at a stable genomic locus (e.g., a neutral locus integration). Virtually all singlet cells fall within the mCitrine gate.
+
+- **DGY3954** is the most biologically interesting sample: 42.79% of singlet cells are mCitrine-positive while 57.21% are not, producing a **heterogeneous population**. In the context of GAP1 copy number variation reporter strains, this bimodal distribution is consistent with an active CNV event, where a subpopulation of cells has amplified the GAP1-mCitrine locus in response to nutrient stress, while the remainder retain the ancestral copy number. Alternatively, the mCitrine gene may be under a regulated promoter active in only a subset of cells.
+
+---
+
+*Analysis conducted June 2026 · Gresham Lab, New York University*

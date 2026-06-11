@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Research | Alex Gresham</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    @media (max-width: 700px) {
+      .entry-split { grid-template-columns: 1fr !important; }
+      .img-gallery  { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Alex Gresham</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="r-programming.html">R Programming</a></li>
+      <li><a href="lab-research.html" class="active">Lab Research</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Laboratory Research Notebook</h1>
+  <p>Gresham Lab &mdash; New York University &mdash; May &ndash; June 2026</p>
+</div>
+
+<main>
+
+  <div class="timeline-intro">
+    <strong>Research Context:</strong> Experimental work at the Gresham Lab, NYU Summer 2026 intensive.
+    Focus: construction and verification of recombinant plasmids for <em>S. cerevisiae</em> and
+    phenotypic characterization of yeast knockout strains. Entries are in chronological order.
+  </div>
+
+  <!-- ══ 1 — Rich Media ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">May 2026 &mdash; Entry 1</span>
+      <h2>Preparation of YPD Rich Media</h2>
+      <span class="outcome-badge outcome-success">Successful</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Prepare 250 mL of sterile YPD liquid medium and agar plates for downstream <em>S. cerevisiae</em> culture.</p>
+      <h3>Protocol Summary</h3>
+      <ul>
+        <li>2.8 g yeast extract + 5 g peptone + 5 g agar dissolved in 237.5 mL dH<sub>2</sub>O</li>
+        <li>Autoclaved at 121&deg;C for 15 min</li>
+        <li>12.5 mL of 40% sterile glucose added post-autoclave → 250 mL total</li>
+      </ul>
+      <div class="result-callout">
+        <strong>Why add glucose after autoclaving?</strong>
+        Glucose caramelizes at autoclave temperatures, reducing its availability as a carbon source.
+        Post-autoclave addition preserves its nutritional value.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 2 — Streaking / bacteria ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 13 / 2026 &mdash; Entry 2</span>
+      <h2>Yeast Streaking &amp; Bacterial Culture Initiation</h2>
+      <span class="outcome-badge outcome-success">Successful</span>
+    </div>
+    <div class="lab-entry-body">
+      <div class="entry-split">
+        <div>
+          <h3>Aim</h3>
+          <p>Isolate a single <em>S. cerevisiae</em> colony; initiate overnight <em>E. coli</em> cultures for plasmid DNA harvest.</p>
+          <h3>Methods</h3>
+          <ul>
+            <li><strong>Yeast:</strong> Serial dilution streaking on YPD agar; incubated 30&deg;C for 48 h</li>
+            <li><strong>Bacteria:</strong> DGP474 &amp; DGP493 strains inoculated into LB + ampicillin (4 &mu;L); 37&deg;C shaking overnight at ~200 rpm</li>
+          </ul>
+          <div class="result-callout">
+            <strong>Rationale</strong>
+            Single-colony isolation ensures clonal (genetically uniform) populations.
+            Ampicillin selection ensures only plasmid-bearing cells survive.
+          </div>
+        </div>
+        <div>
+          <!-- Replica plating image is a visual stand-in for streaking context -->
+          <img src="images/notebook_page-09.png" alt="Replica plating of yeast strains on selective media" class="entry-image">
+          <p class="img-caption">Yeast colonies growing on selective agar plates (replica plating, Entry 6)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 3 — Miniprep ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 14 / 2026 &mdash; Entry 3</span>
+      <h2>Miniprep Plasmid DNA Purification &amp; Quantification</h2>
+      <span class="outcome-badge outcome-success">Successful</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Purify plasmid DNA from <em>E. coli</em> cultures of DGP474, DGP487, DGP488, and DGP493 using the QIAprep alkaline lysis spin column protocol.</p>
+      <h3>Key Steps</h3>
+      <ul>
+        <li>Alkaline lysis (NaOH/SDS) denatures proteins and chromosomal DNA</li>
+        <li>Neutralization precipitates denatured material; plasmid remains in solution</li>
+        <li>Silica column adsorbs plasmid under high-salt conditions; eluted in 50 &mu;L H<sub>2</sub>O</li>
+      </ul>
+      <h3>Results</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Plasmid</th>
+            <th>Conc. (ng/&mu;L)</th>
+            <th>A<sub>260</sub>/A<sub>280</sub></th>
+            <th>Total Yield (ng)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>DGP474</td><td>271.0</td><td>1.87</td><td>13,550</td></tr>
+          <tr><td>DGP493</td><td>65.5</td><td>1.64</td><td>3,275</td></tr>
+          <tr><td>DGP487</td><td>82.7</td><td>1.69</td><td>4,135</td></tr>
+          <tr><td>DGP488</td><td>59.8</td><td>1.68</td><td>2,990</td></tr>
+        </tbody>
+      </table>
+      <div class="result-callout">
+        <strong>Conclusion</strong>
+        DGP474 yielded an exceptionally high concentration consistent with its high-copy nature.
+        All other plasmids were within acceptable range. Low A<sub>260</sub>/A<sub>230</sub> for DGP493 (0.67)
+        suggests residual buffer contamination, likely from a pipetting error during washing.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 4 — Restriction digest ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 18 – 19 / 2026 &mdash; Entry 4</span>
+      <h2>Restriction Enzyme Digestion — Plasmid Identity Verification</h2>
+      <span class="outcome-badge outcome-success">Identity Confirmed</span>
+    </div>
+    <div class="lab-entry-body">
+      <div class="entry-split">
+        <div>
+          <h3>Aim</h3>
+          <p>Confirm plasmid identities (DGP474 and DGP488) by comparing observed restriction fragment sizes to predicted maps.</p>
+          <h3>Enzymes Used</h3>
+          <div class="stat-row">
+            <div class="stat-pill">BbsI-HF<span>cuts both plasmids</span></div>
+            <div class="stat-pill">EcoRI-HF<span>linearizes both</span></div>
+            <div class="stat-pill">BamHI-HF<span>no cut in DGP474</span></div>
+          </div>
+          <h3>Results</h3>
+          <ul>
+            <li><strong>DGP474 — BbsI:</strong> ~6.3 kb (as predicted)</li>
+            <li><strong>DGP474 — EcoRI:</strong> ~7.3 kb linear (as predicted)</li>
+            <li><strong>DGP474 — BamHI:</strong> no cut ✓</li>
+            <li><strong>DGP488 — EcoRI:</strong> ~8 kb (as predicted)</li>
+            <li><strong>DGP488 — BamHI:</strong> ~7.4 kb (as predicted)</li>
+          </ul>
+          <div class="result-callout">
+            <strong>Conclusion</strong>
+            All fragment sizes matched predicted restriction maps, confirming correct plasmid identity.
+          </div>
+        </div>
+        <div>
+          <img src="images/notebook_page-06.png" alt="Agarose gel showing restriction enzyme digestion patterns for DGP474 and DGP488" class="entry-image">
+          <p class="img-caption">1.0% agarose gel — restriction digests of DGP474 (lanes 1–4) and DGP488 (lanes 5–8) with 1 kb NEB ladder</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5 — SC-His plates ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 19 / 2026 &mdash; Entry 5</span>
+      <h2>Preparation of SC-His Selective Media</h2>
+      <span class="outcome-badge outcome-success">Successful</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Prepare SC-His agar plates for auxotrophic selection of yeast transformants carrying a <em>HIS3</em>-marked plasmid.</p>
+      <h3>Composition (at ¼ scale, 475 mL)</h3>
+      <div class="stat-row">
+        <div class="stat-pill">0.855 g YNB<span>nitrogen base</span></div>
+        <div class="stat-pill">1 g dropout mix<span>minus histidine</span></div>
+        <div class="stat-pill">2.5 g ammonium sulfate<span>nitrogen source</span></div>
+        <div class="stat-pill">10 g Bacto-agar<span>solidifying agent</span></div>
+        <div class="stat-pill">25 mL 40% glucose<span>added post-autoclave</span></div>
+      </div>
+      <div class="result-callout">
+        <strong>Selection Principle</strong>
+        Only yeast carrying the <em>HIS3</em> gene (encoding imidazoleglycerol-phosphate dehydratase)
+        can synthesize histidine and therefore survive on these plates. Untransformed cells, which carry
+        a <em>his3</em> deletion, cannot grow.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 6 — Replica plating ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 19 / 2026 &mdash; Entry 6</span>
+      <h2>Replica Plating — Strain Phenotype Characterization</h2>
+      <span class="outcome-badge outcome-success">Growth as Expected</span>
+    </div>
+    <div class="lab-entry-body">
+      <div class="entry-split">
+        <div>
+          <img src="images/notebook_page-09.png" alt="Five replica plates showing yeast growth on different selective media" class="entry-image">
+          <p class="img-caption">Yeast strains DGY3264 and DGY3283 replica-plated onto YPD+NAT, YPD, YPD+G418, SC-His, and SC-Ura</p>
+        </div>
+        <div>
+          <h3>Aim</h3>
+          <p>Characterize auxotrophic and drug resistance phenotypes of strains DGY3264 and DGY3283 across multiple selective media.</p>
+          <h3>Strain Genotypes</h3>
+          <table class="data-table">
+            <thead><tr><th>Strain</th><th>Mating Type</th><th>Resistance</th><th>Auxotrophy</th></tr></thead>
+            <tbody>
+              <tr><td>DGY3264</td><td>MAT&alpha;</td><td>NAT<sup>R</sup></td><td><em>his3</em>, URA3&rarr;AGA1</td></tr>
+              <tr><td>DGY3283</td><td>MATa</td><td>NAT<sup>R</sup></td><td><em>his3</em>, URA3&rarr;AGA1</td></tr>
+            </tbody>
+          </table>
+          <div class="result-callout">
+            <strong>Conclusion</strong>
+            Growth patterns matched annotated genotypes across all media. Both strains carry
+            <em>his3</em> deletions, confirming they are suitable recipients for HIS3-plasmid
+            transformation experiments.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 7 — Transformation ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 20 / 2026 &mdash; Entry 7</span>
+      <h2>High-Efficiency Lithium Acetate Yeast Transformation</h2>
+      <span class="outcome-badge outcome-fail">Unsuccessful</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Introduce plasmid DGP474 into <em>S. cerevisiae</em> via LiAc transformation; select transformants on SC-His.</p>
+      <h3>Transformation Mix (per reaction)</h3>
+      <div class="stat-row">
+        <div class="stat-pill">240 &mu;L PEG 3500 50%<span>cell permeabilizer</span></div>
+        <div class="stat-pill">36 &mu;L LiAc 1.0 M<span>competence agent</span></div>
+        <div class="stat-pill">50 &mu;L SS carrier DNA<span>2 mg/mL, boiled</span></div>
+        <div class="stat-pill">34 &mu;L plasmid DNA<span>DGP474</span></div>
+      </div>
+      <ul>
+        <li>Cells heat shocked at 42&deg;C for 40 min</li>
+        <li>Plated in 2, 20, and 200 &mu;L volumes on SC-His</li>
+        <li>Incubated 30&deg;C for 2–4 days</li>
+      </ul>
+      <div class="result-callout">
+        <strong>Result &amp; Conclusion</strong>
+        No colonies observed. Subsequent validation (Entry 8) confirmed SC-His plates were functional,
+        implicating the transformation step itself. Likely causes: suboptimal cell density, degraded LiAc,
+        or insufficient carrier DNA.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 8 — SC-His validation ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 26 / 2026 &mdash; Entry 8</span>
+      <h2>SC-His Plate Validation by Replica Plating</h2>
+      <span class="outcome-badge outcome-success">Plates Validated</span>
+    </div>
+    <div class="lab-entry-body">
+      <p>
+        Yeast from a YPD plate were replica-plated onto SC-His and allowed to grow overnight at 30&deg;C.
+        Robust colony growth was observed, confirming that the selective medium was correctly prepared
+        and capable of supporting histidine-prototrophic yeast. The transformation failure (Entry 7)
+        was therefore not attributable to a media defect.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ 9 — PCR ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 21 / 2026 &mdash; Entry 9</span>
+      <h2>PCR Amplification of Plasmid Inserts</h2>
+      <span class="outcome-badge outcome-partial">Contamination Detected</span>
+    </div>
+    <div class="lab-entry-body">
+      <div class="entry-split">
+        <div>
+          <h3>Aim</h3>
+          <p>Amplify specific sequences from DGP474, DGP493, DGP487, and DGP488 using OneTaq Master Mix.</p>
+          <h3>Expected Products</h3>
+          <ul>
+            <li>DGP474 (DG1109/DG1110): <strong>309 bp</strong></li>
+            <li>DGP493 (DG1659/DG1662): <strong>764 bp</strong></li>
+            <li>DGP487 (DG1656/DG2885): <strong>381 bp</strong></li>
+            <li>DGP488 (DG1062/DG2663): <strong>390 bp</strong></li>
+          </ul>
+          <div class="result-callout">
+            <strong>Result</strong>
+            Only Lanes 2 (DGP474, 309 bp) and 5 (DGP487, 381 bp) produced expected bands.
+            Bands in negative control lanes indicated reagent contamination.
+            All reagents were discarded and replaced.
+          </div>
+        </div>
+        <div>
+          <img src="images/notebook_page-12.png" alt="PCR gel showing expected and contaminated lanes" class="entry-image">
+          <p class="img-caption">2.0% agarose gel — PCR products from DGP474, DGP493, DGP487, DGP488. Lanes alternate experimental and negative control. Evidence of contamination in multiple lanes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 10 — Sanger sequencing ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 26 / 2026 &mdash; Entry 10</span>
+      <h2>Sanger Sequencing Verification of PCR Product</h2>
+      <span class="outcome-badge outcome-success">Identity Confirmed</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Confirm sequence identity of DGP487 PCR product (primers DG1656/DG2885) by Sanger sequencing and SnapGene alignment.</p>
+      <h3>Purification Results</h3>
+      <div class="stat-row">
+        <div class="stat-pill">~51 ng/&mu;L<span>PCR product yield</span></div>
+        <div class="stat-pill">A<sub>260</sub>/A<sub>280</sub> = 1.94<span>high purity</span></div>
+        <div class="stat-pill">Eluted in 30 &mu;L<span>5 mM Tris-HCl pH 8.5</span></div>
+      </div>
+      <h3>Sequence Alignment</h3>
+      <div class="img-gallery">
+        <figure>
+          <img src="images/alignment_dgp487_1.png" alt="SnapGene alignment overview of DGP487 PCR product">
+          <figcaption>SnapGene overview — primer DG1656 binding site on DGP487</figcaption>
+        </figure>
+        <figure>
+          <img src="images/alignment_dgp487_2.png" alt="SnapGene detailed chromatogram alignment">
+          <figcaption>Chromatogram aligned to DGP487 reference — sequence identity confirmed</figcaption>
+        </figure>
+      </div>
+      <div class="result-callout">
+        <strong>Conclusion</strong>
+        Sanger chromatogram aligned correctly to the expected DGP487 region. PCR product sequence identity confirmed.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 11 — Knockout growth ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">5 / 29 / 2026 &mdash; Entry 11</span>
+      <h2>Growth Analysis of Yeast Knockout Strains</h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <div class="entry-split">
+        <div>
+          <img src="images/notebook_page-15.png" alt="96-well growth curve data and plate layout for knockout strains E1-E4" class="entry-image">
+          <p class="img-caption">96-well plate layout and sigmoidal OD<sub>600</sub> growth curves for knockout strains E1–E4 alongside lab controls</p>
+        </div>
+        <div>
+          <h3>Aim</h3>
+          <p>Determine whether knockout strains E1–E4 exhibit growth defects under standard YPD conditions.</p>
+          <h3>Starting OD Measurements</h3>
+          <table class="data-table">
+            <thead><tr><th>Strain</th><th>Measured OD<sub>600</sub></th><th>Diluted OD</th></tr></thead>
+            <tbody>
+              <tr><td>E1</td><td>0.6216</td><td>6.216</td></tr>
+              <tr><td>E2</td><td>0.5444</td><td>5.444</td></tr>
+              <tr><td>E3</td><td>0.5662</td><td>5.662</td></tr>
+              <tr><td>E4</td><td>0.6422</td><td>6.422</td></tr>
+            </tbody>
+          </table>
+          <div class="result-callout">
+            <strong>Key Findings</strong>
+            All strains reached final OD 1.82–1.97; medium was not limiting.
+            E2 and E4 grew fastest; E1 was slowest with greatest variability.
+            No severe growth defects detected — growth differences are likely intrinsic to the genetic perturbations.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 12 — PCR for cloning ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">6 / 1 – 6 / 2 / 2026 &mdash; Entry 12</span>
+      <h2>PCR Reactions for Cloning Assembly (Project 2)</h2>
+      <span class="outcome-badge outcome-partial">Fragment ✓ &nbsp;Vector ✗</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>Amplify DGP488 insert fragment and DGP475 vector backbone separately for downstream Gibson Assembly.</p>
+      <div class="img-gallery">
+        <figure>
+          <img src="images/notebook_page-19.png" alt="Three gel images showing PCR results for DGP475 vector, DGP488 fragment, and linear templates">
+          <figcaption>6/1/26 — Three gels: DGP475 vector (top), DGP488 fragment (middle), linear templates (bottom)</figcaption>
+        </figure>
+        <figure>
+          <img src="images/notebook_page-20.png" alt="PCR gel with Q5 Hot Start Master Mix retrial and circular plasmid map">
+          <figcaption>6/2/26 — Q5 Hot Start retrial. DGP488 fragment successful (bottom gel); DGP475 vector still unsuccessful (top gel)</figcaption>
+        </figure>
+      </div>
+      <div class="result-callout">
+        <strong>Conclusion</strong>
+        DGP488 fragment amplified successfully with Q5 Hot Start polymerase, producing strong bands at the expected size.
+        DGP475 vector backbone amplification consistently failed across multiple polymerase formulations,
+        likely due to the large template size requiring optimized extension time or long-range PCR conditions.
+        <strong>Ongoing.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 13 — Flow Cytometry ══ -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">6 / 9 / 2026 &mdash; Entry 13</span>
+      <h2>Flow Cytometry Analysis of mCitrine Expression</h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Aim</h3>
+      <p>
+        Quantify mCitrine fluorescence at single-cell resolution across four
+        <em>S. cerevisiae</em> strains using the Cytek Aurora flow cytometer,
+        following the Gresham Lab CytoExploreR analysis pipeline.
+      </p>
+      <h3>Methods</h3>
+      <ul>
+        <li>20,000 events measured per sample on the Cytek Aurora</li>
+        <li>mCitrine detected via <strong>B2-A channel</strong> (ex. 516 nm / em. 529 nm)</li>
+        <li>Gating hierarchy: All Events → Cells → FSC Singlets → mCitrine gate</li>
+        <li>Data exported as summary statistics; analyzed in R using <code>tidyverse</code></li>
+      </ul>
+      <h3>Strains Analyzed</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>Strain</th><th>Description</th><th>FSC Singlets</th><th>mCitrine+ Cells</th><th>% mCitrine+</th><th>Median B2-A</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>DGY3283</td><td>Negative control (no mCitrine)</td><td>9,851</td><td>2</td><td>0.02%</td><td>728</td></tr>
+          <tr><td>DGY2807</td><td>Negative control (no mCitrine)</td><td>12,392</td><td>2</td><td>0.02%</td><td>750</td></tr>
+          <tr><td>DGY3955</td><td>mCitrine-expressing strain</td><td>12,960</td><td>12,920</td><td>99.69%</td><td>59,245</td></tr>
+          <tr><td>DGY3954</td><td>Experimental strain</td><td>7,509</td><td>3,213</td><td>42.79%</td><td>3,003</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Results</h3>
+      <!-- Chart.js bar chart — no R rendering needed -->
+      <div style="max-width:520px; margin: 1rem auto;">
+        <canvas id="flowChart" height="220"></canvas>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+      <script>
+        const ctx = document.getElementById('flowChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['DGY3283\n(−ctrl)', 'DGY2807\n(−ctrl)', 'DGY3955\n(mCit+)', 'DGY3954\n(experimental)'],
+            datasets: [{
+              label: '% mCitrine-positive cells',
+              data: [0.02, 0.02, 99.69, 42.79],
+              backgroundColor: ['#aec6cf','#aec6cf','#2a7f7f','#c8873c'],
+              borderRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'mCitrine Expression by Strain (June 9, 2026)',
+                font: { size: 13, weight: 'bold' },
+                color: '#1a2e4a'
+              }
+            },
+            scales: {
+              y: {
+                min: 0, max: 110,
+                title: { display: true, text: '% mCitrine-positive cells' },
+                ticks: { callback: v => v + '%' }
+              },
+              x: { ticks: { maxRotation: 0 } }
+            }
+          }
+        });
+      </script>
+      <p class="img-caption" style="margin-top:0.5rem;">
+        Percentage of FSC-gated singlet cells falling within the mCitrine+ gate for each strain.
+        Data from Cytek Aurora; analysis in R (<a href="flow-cytometry.Rmd" download>download Rmd</a>).
+      </p>
+
+      <h3>Conclusions</h3>
+      <ul>
+        <li><strong>DGY3283 and DGY2807</strong> confirmed as zero-copy negative controls (&lt;0.05% mCitrine), validating the gating strategy.</li>
+        <li><strong>DGY3955</strong> shows 99.69% mCitrine positivity, consistent with constitutive single-copy expression at a stable genomic locus.</li>
+        <li><strong>DGY3954</strong> is the most biologically significant result: 42.79% of singlet cells are mCitrine-positive while 57.21% are not. This heterogeneous, bimodal population is consistent with an active copy number variation (CNV) event at the <em>GAP1</em> locus — a subpopulation of cells has amplified the <em>GAP1</em>-mCitrine reporter under nutrient stress while the remainder retain the ancestral copy number.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Future work ── -->
+  <div class="section-card">
+    <h2>Ongoing Work &amp; Next Steps</h2>
+    <ul style="margin-left:1.2rem; font-size:0.95rem; line-height:1.9;">
+      <li>Optimize DGP475 vector PCR — adjust extension time or switch to long-range polymerase</li>
+      <li>Repeat yeast transformation with fresh competent cells and verified reagents</li>
+      <li>Continue growth phenotype analysis of knockout strains</li>
+      <li>Expand flow cytometry analysis with additional time points to track CNV dynamics in DGY3954</li>
+    </ul>
+    <p style="color: var(--muted); font-style: italic; font-size:0.88rem; margin-top:1rem;">
+      Last updated June 2026. This page will be updated as research continues.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  <p>Alex Gresham &mdash; Summer Research Portfolio &mdash; Gresham Lab, New York University, 2026</p>
+  <p style="margin-top:0.35rem;">
+    <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
+    <a href="r-programming.html">R Programming</a> &nbsp;&middot;&nbsp;
+    <a href="lab-research.html">Lab Research</a>
+  </p>
+</footer>
+
+</body>
+</html>

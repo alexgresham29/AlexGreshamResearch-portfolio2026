@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R Programming | Alex Gresham</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Alex Gresham</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="r-programming.html" class="active">R Programming</a></li>
+      <li><a href="lab-research.html">Lab Research</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>R Programming &amp; Data Analysis</h1>
+  <p>Statistical computing, data visualization, and reproducible research using R</p>
+</div>
+
+<main>
+
+  <div class="section-card">
+    <h2>Overview</h2>
+    <p>
+      Throughout the Summer 2026 intensive program, I developed proficiency in R as a
+      primary tool for data analysis and scientific visualization. All work was
+      conducted in RStudio using the R Markdown notebook format, which integrates
+      executable code, output, and narrative text into a single reproducible document.
+    </p>
+    <p>
+      The analyses below progress from foundational statistical computing with base R
+      to advanced data manipulation using the <em>tidyverse</em> ecosystem and
+      biological data analysis with domain-specific packages such as
+      <em>Growthcurver</em>. Each notebook link opens the fully rendered HTML output,
+      including all code, figures, and interpretations.
+    </p>
+  </div>
+
+  <!-- ── Project 1: Dog weights ── -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">Assignment 1</span>
+      <h2>Introductory Data Analysis: Dog Weight Statistics</h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Objective</h3>
+      <p>
+        This assignment introduced core R programming concepts including data import,
+        base graphics, statistical filtering with <code>dplyr</code>, and hypothesis
+        testing. The dataset comprised weight measurements (in pounds) for three dog
+        breeds: pitbulls, beagles, and dalmatians.
+      </p>
+
+      <h3>Methods &amp; Skills Demonstrated</h3>
+      <p>
+        Data were imported from a comma-separated values (CSV) file using
+        <code>read.csv()</code>. A multi-group boxplot was constructed using base R
+        graphics to compare weight distributions across breeds. The distribution of
+        pitbull weights was visualized both as raw measurements and as standardized
+        Z-scores using histograms rendered in a two-panel layout with
+        <code>par(mfrow)</code>.
+      </p>
+      <p>
+        Statistical hypothesis testing was performed using the Student's
+        <em>t</em>-test. A one-sample <em>t</em>-test was applied to evaluate whether
+        beagle weight differed significantly from a reference value of 21 lbs
+        (&mu;<sub>0</sub> = 21). A two-sample <em>t</em>-test was used to compare
+        pitbull and dalmatian weights, assessing whether the observed difference in
+        means was statistically significant.
+      </p>
+
+      <h3>Key Skills</h3>
+      <div class="skills-grid" style="margin-top:0.5rem;">
+        <div class="skill-item"><strong>Base R Graphics</strong>boxplot(), hist(), par(mfrow)</div>
+        <div class="skill-item"><strong>dplyr</strong>filter() for subsetting by group</div>
+        <div class="skill-item"><strong>Hypothesis Testing</strong>One- and two-sample t.test()</div>
+        <div class="skill-item"><strong>Standardization</strong>Z-score computation with scale()</div>
+      </div>
+
+      <h3>Rendered Notebook</h3>
+      <p>
+        <a href="notebooks/Dogweightboxplot.nb.html" target="_blank" class="btn-view">
+          Open Full Notebook &rarr;
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Project 2: Human health ggplot ── -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">Assignment 2</span>
+      <h2>Exploring Human Health Data with ggplot2 and dplyr</h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Objective</h3>
+      <p>
+        This assignment provided structured practice with the <em>tidyverse</em>
+        ecosystem for data manipulation and visualization. A dataset of 200 simulated
+        human samples was analyzed, containing physical measurements (height, weight)
+        and clinical laboratory values (fasting blood glucose, LDL cholesterol), along
+        with demographic variables (sex, hair color, eye color).
+      </p>
+
+      <h3>Data Manipulation with dplyr</h3>
+      <p>
+        The <code>dplyr</code> package was used extensively for data wrangling.
+        <code>select()</code> was used to subset columns of clinical interest;
+        <code>filter()</code> was applied to isolate samples meeting specific clinical
+        criteria, such as female subjects with blood glucose exceeding 100 mg/dL
+        (pre-diabetic range). <code>mutate()</code> was used to compute derived
+        variables: body mass index (BMI) was calculated from height and weight, and
+        a categorical glucose classification variable was created using
+        <code>case_when()</code> to label samples as <em>Normal</em>,
+        <em>Pre-diabetic</em>, or <em>Diabetic</em>. Summary statistics were generated
+        with <code>group_by()</code> and <code>summarise()</code>, enabling
+        sex-stratified and hair-color-stratified comparisons.
+      </p>
+
+      <h3>Data Visualization with ggplot2</h3>
+      <p>
+        Six figures were produced using the <em>ggplot2</em> grammar of graphics
+        framework, each demonstrating a distinct visualization technique:
+      </p>
+      <p>
+        <strong>Histogram (blood glucose by sex):</strong> An overlapping histogram
+        with transparency (<code>alpha = 0.6</code>) illustrating the distribution
+        of fasting glucose values across male and female participants.
+      </p>
+      <p>
+        <strong>Scatter plot with linear regression (height vs. weight):</strong>
+        A scatter plot with sex-colored points and per-group regression lines generated
+        using <code>geom_smooth(method = "lm")</code>, demonstrating the positive
+        correlation between height and body mass in both sexes.
+      </p>
+      <p>
+        <strong>Box plot with jitter (BMI by sex):</strong> Distribution of BMI values
+        overlaid with individual data points to reveal within-group variability and
+        potential outliers.
+      </p>
+      <p>
+        <strong>Grouped bar chart (sample counts by hair color and sex):</strong>
+        A dodged bar chart using <code>geom_bar(position = "dodge")</code>
+        illustrating sample composition across demographic categories.
+      </p>
+      <p>
+        <strong>Scatter plot with colorblind-friendly palette (BMI vs. LDL):</strong>
+        Points colored by glucose category using
+        <code>scale_color_brewer(palette = "Set2")</code> to assess the relationship
+        between adiposity and cholesterol across metabolic subgroups.
+      </p>
+      <p>
+        <strong>Faceted scatter plot (glucose vs. LDL by sex):</strong>
+        <code>facet_wrap(~ sex)</code> used to produce side-by-side panels enabling
+        direct visual comparison between male and female participants.
+      </p>
+
+      <h3>Conclusions</h3>
+      <p>
+        The analysis demonstrated that BMI was elevated in pre-diabetic and diabetic
+        groups relative to normoglycemic individuals, consistent with the well-established
+        association between obesity and impaired glucose regulation. However, substantial
+        overlap between BMI distributions across glucose categories indicates that BMI
+        alone is insufficient as a diagnostic predictor of glucose dysregulation.
+        No strong linear relationship was observed between BMI and LDL cholesterol in
+        this simulated dataset.
+      </p>
+
+      <h3>Rendered Notebook</h3>
+      <p>
+        <a href="notebooks/ggplot_tidyverse_exercise.nb.html" target="_blank" class="btn-view">
+          Open Full Notebook &rarr;
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Project 3: Growth curves ── -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">Assignment 3</span>
+      <h2>Growth Curve Analysis Using the Tecan 96-Well Plate Reader</h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Objective</h3>
+      <p>
+        This analysis followed a bioinformatics vignette developed by the Gresham
+        Laboratory to process and interpret optical density (OD<sub>600</sub>) growth
+        curve data generated from a Tecan 96-well plate reader. The dataset comprised
+        283 time-series OD measurements acquired over 24 hours from four experimental
+        conditions: <em>Saccharomyces cerevisiae</em> and <em>Candida albicans</em>
+        grown in rich (YPD) and glutamine-limited media, with six biological replicates
+        and three technical replicates per condition.
+      </p>
+
+      <h3>Analytical Workflow</h3>
+      <p>
+        Raw OD data were imported from CSV format and joined with a sample sheet
+        mapping well identifiers to experimental conditions. Time values were converted
+        from seconds to hours. Visual inspection of blank wells revealed contamination
+        in two wells (D1 and D6), which were excluded from downstream analysis.
+      </p>
+      <p>
+        The <em>Growthcurver</em> package was used to fit each growth profile to a
+        four-parameter logistic model:
+      </p>
+      <p style="font-style:italic; text-align:center; color:#555; font-size:0.92rem; margin:0.5rem 0 0.75rem;">
+        N(t) = K / (1 + ((K &minus; N&sub;0;) / N&sub;0;) &middot; e<sup>&minus;rt</sup>)
+      </p>
+      <p>
+        Model fitting yielded the following growth parameters for each well: growth rate
+        (<em>r</em>, hr<sup>&minus;1</sup>), carrying capacity (<em>K</em>, OD units),
+        initial population size (<em>N</em><sub>0</sub>), generation time
+        (<em>t</em><sub>gen</sub>), time to half-maximal carrying capacity
+        (<em>t</em><sub>mid</sub>), and area under the fitted logistic curve (AUC).
+        Pairwise correlations among these parameters were visualized to assess
+        parameter interdependence.
+      </p>
+
+      <h3>Results &amp; Biological Interpretation</h3>
+      <p>
+        <strong>Growth rate:</strong> <em>S. cerevisiae</em> exhibited a higher growth
+        rate in YPD than in glutamine-limited media, and grew faster than
+        <em>C. albicans</em> under both conditions, consistent with its adaptation as a
+        laboratory model organism.
+      </p>
+      <p>
+        <strong>Carrying capacity:</strong> Final OD values were similar between species
+        in YPD, but diverged under glutamine limitation, suggesting differential
+        sensitivity to nitrogen source availability.
+      </p>
+      <p>
+        <strong>Generation time:</strong> Generation times were shortest for
+        <em>S. cerevisiae</em> in YPD, reflecting optimal growth under non-limiting
+        nutrient conditions.
+      </p>
+      <p>
+        <strong>Parameter correlations:</strong> AUC and carrying capacity were highly
+        correlated, as expected mathematically, while initial population size (N<sub>0</sub>)
+        and <em>t</em><sub>mid</sub> were largely independent of each other.
+      </p>
+
+      <h3>Key Skills</h3>
+      <div class="skills-grid" style="margin-top:0.5rem;">
+        <div class="skill-item"><strong>Growthcurver</strong>Logistic model fitting to OD time-series data</div>
+        <div class="skill-item"><strong>tidyverse</strong>pivot_longer(), left_join(), unite(), group_by()</div>
+        <div class="skill-item"><strong>ggplot2</strong>facet_grid(), geom_line(), geom_beeswarm()</div>
+        <div class="skill-item"><strong>Data QC</strong>Blank well inspection, outlier removal, batch correction</div>
+      </div>
+
+      <h3>Rendered Notebook</h3>
+      <p>
+        <a href="notebooks/AlexNotebook.nb.html" target="_blank" class="btn-view">
+          Open Full Notebook &rarr;
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Project 4: Flow cytometry ── -->
+  <div class="lab-entry">
+    <div class="lab-entry-header">
+      <span class="date">Assignment 4</span>
+      <h2>Flow Cytometry Data Analysis: mCitrine Expression in <em>S. cerevisiae</em></h2>
+      <span class="outcome-badge outcome-success">Complete</span>
+    </div>
+    <div class="lab-entry-body">
+      <h3>Objective</h3>
+      <p>
+        This analysis follows the Gresham Lab CytoExploreR vignette to process and
+        interpret Cytek Aurora flow cytometry summary statistics. Four yeast strains
+        were evaluated for mCitrine fluorescence on June 9, 2026, with the goal of
+        quantifying the fraction of cells expressing the fluorescent reporter and
+        interpreting the biological significance of expression heterogeneity.
+      </p>
+
+      <h3>Data &amp; Pipeline</h3>
+      <p>
+        Gated summary statistics were exported from the Cytek Aurora in CSV format
+        (20,000 events per sample). The full class dataset
+        (<code>June9_Scer_students.CSV</code>) contained 17 samples; this analysis
+        focuses on rows 14–17 (the "AG" samples). The CytoExploreR gating hierarchy
+        applied was: All Events → Cells → FSC Singlets → mCitrine gate, using
+        forward scatter (FSC-A) and the B2-A fluorescence channel.
+      </p>
+
+      <h3>Methods &amp; Skills Demonstrated</h3>
+      <p>
+        The CSV was loaded with <code>read_csv()</code> and filtered to the AG rows
+        using <code>str_ends()</code> and <code>filter()</code>. Column names
+        containing spaces and special characters were handled with backtick quoting.
+        Strain identifiers were extracted from sample name strings using
+        <code>str_extract()</code> with a regular expression. Visualizations were
+        produced with <code>ggplot2</code>, including a bar chart of mCitrine% per
+        strain and a full-class comparison using <code>coord_flip()</code> and
+        <code>reorder()</code>. Numeric formatting used <code>scales::comma</code>
+        and <code>formatC()</code>.
+      </p>
+
+      <h3>Key Skills</h3>
+      <div class="skills-grid" style="margin-top:0.5rem;">
+        <div class="skill-item"><strong>String manipulation</strong>str_ends(), str_extract(), regex patterns</div>
+        <div class="skill-item"><strong>Data cleaning</strong>Renaming BOM-prefixed columns, coercing types</div>
+        <div class="skill-item"><strong>ggplot2</strong>geom_col(), coord_flip(), scale_fill_manual(), geom_text()</div>
+        <div class="skill-item"><strong>Biological interpretation</strong>Gating strategy, CNV reporter context, bimodal distributions</div>
+      </div>
+
+      <h3>R Notebook</h3>
+      <p>
+        <a href="flow-cytometry.Rmd" download class="btn-view">Download Rmd &rarr;</a>
+        &nbsp; Render with <code>rmarkdown::render("flow-cytometry.Rmd")</code> in RStudio.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>Alex Gresham &mdash; Summer Research Portfolio &mdash; Gresham Lab, New York University, 2026</p>
+  <p style="margin-top:0.35rem;">
+    <a href="index.html">Home</a> &nbsp;&middot;&nbsp;
+    <a href="r-programming.html">R Programming</a> &nbsp;&middot;&nbsp;
+    <a href="lab-research.html">Lab Research</a>
+  </p>
+</footer>
+
+</body>
+</html>
